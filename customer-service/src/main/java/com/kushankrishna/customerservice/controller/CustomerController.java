@@ -1,7 +1,6 @@
 package com.kushankrishna.customerservice.controller;
 
 import com.kushankrishna.customerservice.dto.*;
-import com.techmahindra.customerservice.dto.*;
 import com.kushankrishna.customerservice.model.LibraryCustomer;
 import com.kushankrishna.customerservice.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;

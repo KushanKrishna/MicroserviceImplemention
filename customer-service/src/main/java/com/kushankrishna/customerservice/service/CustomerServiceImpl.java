@@ -2,7 +2,6 @@ package com.kushankrishna.customerservice.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kushankrishna.customerservice.dto.*;
-import com.techmahindra.customerservice.dto.*;
 import com.kushankrishna.customerservice.model.CustomerBook;
 import com.kushankrishna.customerservice.model.LibraryCustomer;
 import com.kushankrishna.customerservice.repository.CustomerRepository;

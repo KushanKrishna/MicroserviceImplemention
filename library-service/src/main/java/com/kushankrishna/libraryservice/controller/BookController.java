@@ -1,7 +1,6 @@
 package com.kushankrishna.libraryservice.controller;
 
 import com.kushankrishna.libraryservice.dto.*;
-import com.techmahindra.libraryservice.dto.*;
 import com.kushankrishna.libraryservice.model.Book;
 import com.kushankrishna.libraryservice.model.CustomerBook;
 import com.kushankrishna.libraryservice.service.BookService;

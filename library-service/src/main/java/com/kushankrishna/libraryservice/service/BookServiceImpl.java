@@ -3,7 +3,6 @@ package com.kushankrishna.libraryservice.service;
 import com.kushankrishna.libraryservice.dto.*;
 import com.kushankrishna.libraryservice.repository.BookRepository;
 import com.kushankrishna.libraryservice.repository.LibraryRepository;
-import com.techmahindra.libraryservice.dto.*;
 import com.kushankrishna.libraryservice.model.Book;
 import com.kushankrishna.libraryservice.model.Library;
 import org.springframework.beans.factory.annotation.Autowired;

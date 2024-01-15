@@ -1,7 +1,6 @@
 package com.kushankrishna.customerservice.service;
 
 import com.kushankrishna.customerservice.dto.*;
-import com.techmahindra.customerservice.dto.*;
 import com.kushankrishna.customerservice.model.LibraryCustomer;
 
 import java.util.List;

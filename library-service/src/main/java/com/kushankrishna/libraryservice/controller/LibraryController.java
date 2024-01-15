@@ -24,21 +24,32 @@ public class LibraryController {
 
     @PostMapping("/addLibrary")
     public ResponseEntity<?> addLibrary(@RequestBody Library library) {
-        library.getAvailableBookList().stream().forEach(book -> book.setLibrary(library));
-        library.getIssuedBookList().stream().forEach(book -> book.setLibrary(library));
-        library.setAvailableBooksCount((long) (library.getAvailableBookList().size()));
-        library.setIssuedBooksCount((long) (library.getIssuedBookList().size()));
-        if (Objects.nonNull(this.libraryService.saveLibrary(library))) {
-
-            AddLibraryResponseDto addLibraryResponseDto = new AddLibraryResponseDto();
-            addLibraryResponseDto.setStatus("success");
-            addLibraryResponseDto.setTimestamp(new Timestamp(new Date().getTime()));
-            addLibraryResponseDto.setMessage("Library added Successfully");
-            addLibraryResponseDto.setHttpStatus(HttpStatus.OK.value());
-            return new ResponseEntity<>(addLibraryResponseDto, HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        if (library.getAvailableBookList() != null && library.getIssuedBookList() != null) {
+            library.getAvailableBookList().stream().forEach(book -> book.setLibrary(library));
+            library.getIssuedBookList().stream().forEach(book -> book.setLibrary(library));
+            library.setAvailableBooksCount((long) (library.getAvailableBookList().size()));
+            library.setIssuedBooksCount((long) (library.getIssuedBookList().size()));
+            if (Objects.nonNull(this.libraryService.saveLibrary(library))) {
+                AddLibraryResponseDto addLibraryResponseDto = new AddLibraryResponseDto();
+                addLibraryResponseDto.setStatus("success");
+                addLibraryResponseDto.setTimestamp(new Timestamp(new Date().getTime()));
+                addLibraryResponseDto.setMessage("Library added Successfully");
+                addLibraryResponseDto.setHttpStatus(HttpStatus.OK.value());
+                return new ResponseEntity<>(addLibraryResponseDto, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            if (Objects.nonNull(this.libraryService.saveLibrary(library))) {
+                AddLibraryResponseDto addLibraryResponseDto = new AddLibraryResponseDto();
+                addLibraryResponseDto.setStatus("success");
+                addLibraryResponseDto.setTimestamp(new Timestamp(new Date().getTime()));
+                addLibraryResponseDto.setMessage("Library added Successfully");
+                addLibraryResponseDto.setHttpStatus(HttpStatus.OK.value());
+                return new ResponseEntity<>(addLibraryResponseDto, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+            }
         }
     }
 

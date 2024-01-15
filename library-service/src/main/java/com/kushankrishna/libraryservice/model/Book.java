@@ -15,7 +15,6 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long Bookid;
     @Column(unique = true)
-    @Pattern(regexp = "^[A-Za-z0-9]+$", message = "Invalid ISBM Number")
     String ISBN;
     String bookName;
     String bookAuthor;

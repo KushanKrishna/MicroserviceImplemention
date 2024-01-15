@@ -47,7 +47,7 @@ public class CustomerServiceUtil {
                     return customerId.toString();
                 }
         }
-        return null;
+        return customerId.toString();
     }
 
     public String getCustomerPwd(LibraryCustomer libraryCustomer) {

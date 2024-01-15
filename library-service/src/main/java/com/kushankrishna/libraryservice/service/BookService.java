@@ -1,7 +1,6 @@
 package com.kushankrishna.libraryservice.service;
 
 import com.kushankrishna.libraryservice.dto.*;
-import com.techmahindra.libraryservice.dto.*;
 import com.kushankrishna.libraryservice.model.Book;
 
 import java.util.List;
