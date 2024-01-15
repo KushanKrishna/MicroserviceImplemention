@@ -1,0 +1,30 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: library-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/library
+    username: root
+    password: root
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        ddl-auto: update
+
+  logging:
+    level:
+      org:
+       hibernate:
+        SQL: DEBUG
+        type: TRACE
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true #true by default
+    register-with-eureka: true #true by default
+    service-url:
+      defaultZone: http://localhost:8761/eureka

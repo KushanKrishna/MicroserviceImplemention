@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: book-service
+          uri: http://localhost:9001
+          predicates:
+            - Path=/books/**, /library/**
+        - id: customer-service
+          uri: http://localhost:9002
+          predicates:
+            - Path=/customer/**
+        - id: library-worker-service
+          uri: http://localhost:9003
+          predicates:
+            - Path=/library-worker/**
+server:
+  port: 9004
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true #true by default
+    register-with-eureka: true #true by default
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+
