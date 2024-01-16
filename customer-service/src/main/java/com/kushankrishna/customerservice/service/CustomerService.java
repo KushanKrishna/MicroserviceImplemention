@@ -12,13 +12,13 @@ public interface CustomerService {
 
     CustomerLoginSuccessResponseDto loginUser(CustomerLoginRequestDto customerLoginRequestDto);
 
-    IssuedBooksResponseDto issueBook(IssueBookReqtDto issueBookRequestDto);
+    IssuedBooksResponseDto issueBook(IssueBookReqtDto issueBookRequestDto,String library);
 
     LibraryCustomer getCustomer(String customerId);
 
     LibraryCustomer save(LibraryCustomer libraryCustomer);
 
-    ReturnBookResponseDto returnIssuedBook(ReturnBookRequestDto returnBookRequestDto);
+    ReturnBookResponseDto returnIssuedBook(ReturnBookRequestDto returnBookRequestDto,String library);
 
     ChangePasswordResponseDto changePassword(ChangePasswordRequestDto changePasswordRequestDto);
 

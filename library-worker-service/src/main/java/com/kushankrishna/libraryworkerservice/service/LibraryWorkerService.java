@@ -11,5 +11,5 @@ public interface LibraryWorkerService {
 
     CustomerResponseDto getCustomerById(String customerId);
 
-    IssuedBooksResponseDto issueBook(IssueBookReqtDto issueBookReqtDto);
+    IssuedBooksResponseDto issueBook(IssueBookReqtDto issueBookReqtDto, String library);
 }

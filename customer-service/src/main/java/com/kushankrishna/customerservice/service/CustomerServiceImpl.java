@@ -8,6 +8,7 @@ import com.kushankrishna.customerservice.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -82,7 +83,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 
     @Override
-    public IssuedBooksResponseDto issueBook(IssueBookReqtDto issueBookRequestDto) {
+    public IssuedBooksResponseDto issueBook(IssueBookReqtDto issueBookRequestDto,String library) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.findAndRegisterModules();
 
@@ -107,7 +108,11 @@ public class CustomerServiceImpl implements CustomerService {
                 issueBookDto.setBookName(bookName);
                 System.out.println(issueBookRequestDto);
                 IssuedBooksResponseDto issueBook;
-                issueBook = restTemplate.postForObject("http://LIBRARY-SERVICE/books/issueBooks", issueBookDto, IssuedBooksResponseDto.class);
+                String baseUrl ="http://LIBRARY-SERVICE/books/issueBooks";
+                UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUriString(baseUrl)
+                        .queryParam("Library",library);
+                String finalUri = uriComponentsBuilder.toUriString();
+                issueBook = restTemplate.postForObject(finalUri, issueBookDto, IssuedBooksResponseDto.class);
                 System.out.println(issueBook);
                 if (Objects.nonNull(issueBook)) {
                     List<CustomerBook> issuedBookList = this.customerServiceUtil.getIssuedBookList(customerId);
@@ -139,12 +144,17 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public ReturnBookResponseDto returnIssuedBook(ReturnBookRequestDto returnBookRequestDto) {
+    public ReturnBookResponseDto returnIssuedBook(ReturnBookRequestDto returnBookRequestDto,String library) {
         ObjectMapper mapper = new ObjectMapper();
         List<LibraryCustomer> all = this.customerRepository.findAll();
         LibraryCustomer customer = all.stream().filter(libraryCustomer -> libraryCustomer.getCustomerId().equals(returnBookRequestDto.getCustomerId())).findAny().orElse(null);
-        ReturnBookResponseDto returnBookResponseDto = mapper.convertValue(restTemplate.postForObject("http://LIBRARY-SERVICE/books/returnBook", returnBookRequestDto, ReturnBookResponseDto.class), ReturnBookResponseDto.class);
+        String baseUrl ="http://LIBRARY-SERVICE/books/returnBook";
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.fromUriString(baseUrl)
+                .queryParam("Library",library);
+        String finalUri = uriComponentsBuilder.toUriString();
+        ReturnBookResponseDto returnBookResponseDto = mapper.convertValue(restTemplate.postForObject(finalUri, returnBookRequestDto, ReturnBookResponseDto.class), ReturnBookResponseDto.class);
         if (Objects.nonNull(returnBookResponseDto)) {
+            assert customer != null;
             customer.setTotalOutstanding(returnBookResponseDto.getTotalOutstanding());
             this.customerRepository.save(customer);
             return returnBookResponseDto;

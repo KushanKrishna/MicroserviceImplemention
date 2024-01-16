@@ -68,9 +68,9 @@ public class BookController {
     }
 
     @PostMapping("/issueBooks")
-    public ResponseEntity<?> issueBooks(@RequestBody IssueBookRequestDto issueBookRequestDto) {
+    public ResponseEntity<?> issueBooks(@RequestParam("Library") String library,@RequestBody IssueBookRequestDto issueBookRequestDto) {
         if (Objects.nonNull(issueBookRequestDto)) {
-            IssueBookResponseDto issueBookResponseDto = this.bookService.issueBook(issueBookRequestDto);
+            IssueBookResponseDto issueBookResponseDto = this.bookService.issueBook(issueBookRequestDto,library);
             if (issueBookResponseDto != null) {
                 return new ResponseEntity<>(issueBookResponseDto, HttpStatus.OK);
             } else {
@@ -82,9 +82,9 @@ public class BookController {
     }
 
     @PostMapping("/returnBook")
-    public ResponseEntity<?> returnBook(@RequestBody ReturnBookRequestDto returnBookRequestDto) {
+    public ResponseEntity<?> returnBook(@RequestParam("Library") String library,@RequestBody ReturnBookRequestDto returnBookRequestDto) {
         if (Objects.nonNull(returnBookRequestDto)) {
-            ReturnBookResponseDto returnBookResponseDto = this.bookService.returnIssuedBook(returnBookRequestDto);
+            ReturnBookResponseDto returnBookResponseDto = this.bookService.returnIssuedBook(returnBookRequestDto,library);
             if (Objects.nonNull(returnBookResponseDto)) {
                 return new ResponseEntity<>(returnBookResponseDto, HttpStatus.OK);
             }

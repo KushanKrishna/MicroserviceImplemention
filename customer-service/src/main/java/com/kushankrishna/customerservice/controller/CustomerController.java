@@ -60,8 +60,8 @@ public class CustomerController {
     }
 
     @PostMapping("/issueBooks")
-    public ResponseEntity<?> issueBooks(@RequestBody IssueBookReqtDto issueBookRequestDto) {
-        IssuedBooksResponseDto issuedBooksResponseDto = this.customerService.issueBook(issueBookRequestDto);
+    public ResponseEntity<?> issueBooks(@RequestParam("Library") String library,@RequestBody IssueBookReqtDto issueBookRequestDto) {
+        IssuedBooksResponseDto issuedBooksResponseDto = this.customerService.issueBook(issueBookRequestDto,library);
 
         if (Objects.nonNull(issuedBooksResponseDto)) {
             LibraryCustomer libraryCustomer = this.customerService.getCustomer(issueBookRequestDto.getCustomerId());
@@ -74,9 +74,9 @@ public class CustomerController {
     }
 
     @PostMapping("/returnBook")
-    public ResponseEntity<?> returnBook(@RequestBody ReturnBookRequestDto returnBookRequestDto) {
+    public ResponseEntity<?> returnBook(@RequestParam("Library") String library,@RequestBody ReturnBookRequestDto returnBookRequestDto) {
         if (Objects.nonNull(returnBookRequestDto)) {
-            ReturnBookResponseDto returnBookResponseDto = this.customerService.returnIssuedBook(returnBookRequestDto);
+            ReturnBookResponseDto returnBookResponseDto = this.customerService.returnIssuedBook(returnBookRequestDto,library);
             if (Objects.nonNull(returnBookResponseDto)) {
                 return new ResponseEntity<>(returnBookResponseDto, HttpStatus.OK);
             }

@@ -14,9 +14,9 @@ public interface BookService {
 
     Book searchBook(String bookName);
 
-    IssueBookResponseDto issueBook(IssueBookRequestDto issueBookRequestDto);
+    IssueBookResponseDto issueBook(IssueBookRequestDto issueBookRequestDto, String library);
 
-    ReturnBookResponseDto returnIssuedBook(ReturnBookRequestDto returnBookRequestDto);
+    ReturnBookResponseDto returnIssuedBook(ReturnBookRequestDto returnBookRequestDto, String library);
 
     List<Book> getIssuedBookList();
 

@@ -57,12 +57,12 @@ public class LibraryWorkerServiceImpl implements LibraryWorkerService {
     }
 
     @Override
-    public IssuedBooksResponseDto issueBook(IssueBookReqtDto issueBookReqtDto) {
+    public IssuedBooksResponseDto issueBook(IssueBookReqtDto issueBookReqtDto ,String library) {
         ObjectMapper mapper = new ObjectMapper();
         mapper.findAndRegisterModules();
         IssuedBooksResponseDto issuedBooksResponseDto = new IssuedBooksResponseDto();
         try {
-            issuedBooksResponseDto = mapper.convertValue(restTemplate.postForObject("http://customer-service/customer/issueBooks", issueBookReqtDto, IssuedBooksResponseDto.class), IssuedBooksResponseDto.class);
+            issuedBooksResponseDto = mapper.convertValue(restTemplate.postForObject("http://customer-service/customer/issueBooks?Library="+library, issueBookReqtDto, IssuedBooksResponseDto.class), IssuedBooksResponseDto.class);
             return issuedBooksResponseDto;
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
