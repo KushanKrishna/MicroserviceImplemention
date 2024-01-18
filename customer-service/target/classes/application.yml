@@ -1,13 +1,19 @@
 spring:
   application:
     name: customer-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/bookcustomer
+    username: root
+    password: 9918361480@Kk
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+  config:
+    import: configserver:http://localhost:9005
 server:
   port: 9002
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true #true by default
-    register-with-eureka: true #true by default
-    service-url:
-      defaultZone: http://localhost:8761/eureka

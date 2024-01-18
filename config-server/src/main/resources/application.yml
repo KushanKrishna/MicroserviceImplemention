@@ -1,20 +1,13 @@
 spring:
   application:
     name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/KushanKrishna/microservice-config-server
+          clone-on-start: true
 server:
   port: 9005
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true #true by default
-    register-with-eureka: true #true by default
-    service-url:
-      defaultZone: http://localhost:8761/eureka
 
-cloud:
-  config:
-    server:
-      git:
-        uri: file://${user.home}/cloud-git-repo
-        clone-on-start: true
+

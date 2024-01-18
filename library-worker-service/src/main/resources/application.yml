@@ -1,11 +1,8 @@
+server:
+  port: 9003
+
 spring:
   application:
     name: library-worker-service
-eureka:
-  instance:
-    prefer-ip-address: true
-  client:
-    fetch-registry: true #true by default
-    register-with-eureka: true #true by default
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+  config:
+    import: optional:configserver:http://localhost:9005
