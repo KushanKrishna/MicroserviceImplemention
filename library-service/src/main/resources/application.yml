@@ -5,7 +5,7 @@ spring:
     name: library-service
   datasource:
     url: jdbc:mysql://localhost:3306/booklibrary
-    username: 
+    username:
     password:
   jpa:
     hibernate:
@@ -17,12 +17,3 @@ spring:
   config:
     import: optional:configserver:http://localhost:9005
 
-
-#eureka:
-#  instance:
-#    prefer-ip-address: true
-#  client:
-#    fetch-registry: true #true by default
-#    register-with-eureka: true #true by default
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka
